@@ -1,21 +1,25 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import TodoContext from "../../Context/TodoContext";
 import { Modal, Input, Button, Text, Textarea } from "@nextui-org/react";
 
 export default function TodoCreate () {
-  const { formValues, onChange, storeTodo, errors, setVisible, visible } = useContext(TodoContext);
+  const { formValues, onChange, storeTodo, errors, setVisible, visible, clearFormValues } = useContext(TodoContext);
 
-  const handleCreate = () => setVisible(true);
+
+
+  function handleCreate() {
+    clearFormValues();
+    setVisible(true);
+  }
 
   const closeCreateHandler = () => {
     setVisible(false);
-    console.log("closed");
   };
 
   return (
     <div>
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-fuchsia-900 hover:bg-fuchsia-700 text-white font-bold py-2 px-4 rounded-2xl mt-10"
         onClick={handleCreate}
         >
         Create Todo
@@ -24,16 +28,17 @@ export default function TodoCreate () {
       <Modal
         closeButton
         blur
+        preventClose
         aria-labelledby="modal-title"
         open={visible}
         onClose={closeCreateHandler}
       >
-        <Modal.Header>
+        <Modal.Header className="cursor-default">
           <Text id="modal-title" size={18}>
             Create new Todo
           </Text>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="cursor-default">
             <Input
               clearable
               bordered
@@ -73,7 +78,7 @@ export default function TodoCreate () {
               onChange={onChange}
             />
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="cursor-default">
             <Button
               auto flat color="secondary"
               onPress={storeTodo}

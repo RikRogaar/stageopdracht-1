@@ -4,17 +4,17 @@ import { Modal, Input, Button, Text, Textarea } from "@nextui-org/react";
 
 
 export default function TodoEdit ({ id }) {
-  const { formValues, onChange, errors, getTodo, updateTodo } = useContext(TodoContext);
+  const { formValues, onChange, errors, getTodo, updateTodo, clearFormValues, deleteTodo } = useContext(TodoContext);
   const [editVisible, setEditVisible] = useState(false);
 
   const handleEdit = () => {
+    clearFormValues();
     getTodo(id);
     setEditVisible(true)
   };
 
   const closeEditHandler = () => {
     setEditVisible(false);
-    console.log("closed");
   };
 
   return (
@@ -30,17 +30,19 @@ export default function TodoEdit ({ id }) {
         open={editVisible}
         onClose={closeEditHandler}
         id={id}
+        className="cursor-default"
       >
-        <Modal.Header>
+        <Modal.Header className="cursor-default">
           <Text id="modal-title" size={18}>
             Edit Todo
           </Text>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="cursor-default">
             <Input
               clearable
               bordered
               fullWidth
+              preventClose
               size="lg"
               label="Edit todo title"
               placeholder="Todo title"
@@ -79,7 +81,17 @@ export default function TodoEdit ({ id }) {
             />
 
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="cursor-default">
+            <Button
+              auto flat color="error"
+              onPress={() => {
+                deleteTodo(id)
+                closeEditHandler()
+                }}
+            >
+              Delete todo
+            </Button>
+
             <Button
               auto flat color="secondary"
               onPress={() => {

@@ -1,8 +1,16 @@
-import React from "react";
-import { Card, Grid, Text, Link, Checkbox } from "@nextui-org/react";
+import React, { useContext } from "react";
+import { Card, Grid, Text, Checkbox } from "@nextui-org/react";
 import TodoEdit from "./TodoEdit";
+import TodoContext from "../../Context/TodoContext";
 
 export default function TodoCard({ todo }) {
+    const { updateTodoCheckbox } = useContext(TodoContext);
+
+    const handleCheckbox = () => {
+        todo.is_completed = !todo.is_completed;
+        updateTodoCheckbox(todo.id, todo);
+    };
+
     return (
         <Card css={{ p: "$6", mw: "400px" }} key={todo.id}>
             <Card.Header>
@@ -11,7 +19,8 @@ export default function TodoCard({ todo }) {
                     src={
                         todo.image
                             ? todo.image
-                            : "https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                            // : "https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                            : "https://cdn-icons-png.flaticon.com/512/3884/3884607.png"
                     }
                     width="34px"
                     height="34px"
@@ -29,6 +38,8 @@ export default function TodoCard({ todo }) {
                             labelColor="secondary"
                             lineThrough={true}
                             size="xs"
+                            defaultSelected={todo.is_completed ? true : false}
+                            onChange={handleCheckbox}
                         >
                             Completed
                         </Checkbox>

@@ -8,6 +8,7 @@ export const TodoProdiver = ({ children }) => {
     const [todos, setTodos] = useState([]);
     const [todo, setTodo] = useState([]);
     const [errors, setErrors] = useState({});
+    const [visible, setVisible] = useState(false);
 
     const [formValues, setFormValues] = useState({
         title: "",
@@ -69,11 +70,43 @@ export const TodoProdiver = ({ children }) => {
         }
     };
 
-    const [visible, setVisible] = useState(false);
+    const updateTodoCheckbox = async (id, values) => {
+        try {
+            await axios.put(`todo-items/${id}`, values);
+            getTodos();
+        } catch (error) {
+            if (error.response.status === 422) {
+                setErrors(error.response.data.errors);
+            }
+        }
+    };
 
+    const clearFormValues = () => {
+        setFormValues({
+            title: "",
+            description: "",
+            image: "",
+            is_completed: false,
+        });
+    }
+
+    const deleteTodo = async (id) => {
+        try {
+            await axios.delete(`todo-items/${id}`);
+            getTodos();
+        } catch (error) {
+            if (error.response.status === 422) {
+                setErrors(error.response.data.errors);
+                console.log(error.response.data.errors);
+            }
+        }
+    };
 
     return <TodoContext.Provider
-                value={{ todo, todos, getTodo, getTodos, onChange, formValues, storeTodo, errors, setVisible, visible, updateTodo }}
+                value={{
+                    todo, todos, getTodo, getTodos, onChange, formValues,
+                    storeTodo, errors, setVisible, visible, updateTodo,
+                    updateTodoCheckbox, clearFormValues, deleteTodo }}
                 >
                 {children}
             </TodoContext.Provider>;
