@@ -33,11 +33,13 @@ export default function TodoEdit ({ id }) {
         id={id}
         className="cursor-default"
       >
+
         <Modal.Header className="cursor-default">
           <Text id="modal-title" size={18}>
             Edit Todo
           </Text>
         </Modal.Header>
+
         <Modal.Body className="cursor-default">
             <Input
               clearable
@@ -67,7 +69,6 @@ export default function TodoEdit ({ id }) {
               onChange={onChange}
             />
 
-
             <Input
               clearable
               bordered
@@ -80,10 +81,8 @@ export default function TodoEdit ({ id }) {
               value={formValues.image || ""}
               onChange={onChange}
             />
-
-
-
           </Modal.Body>
+
           <Modal.Footer className="cursor-default">
             <Button
               auto flat color="error"
@@ -105,6 +104,7 @@ export default function TodoEdit ({ id }) {
               Edit todo
             </Button>
           </Modal.Footer>
+
       </Modal>
     </div>
   )
