@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->boolean('is_completed')->default(false);
             $table->text('description')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

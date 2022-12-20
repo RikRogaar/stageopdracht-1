@@ -19,13 +19,14 @@ export default function TodoEdit ({ id }) {
 
   return (
     <div>
-      <Text color="secondary" onClick={handleEdit}>
+      <Text color="secondary" onClick={handleEdit} className="cursor-pointer">
         Edit
       </Text>
 
       <Modal
         closeButton
         blur
+        preventClose
         aria-labelledby="modal-title"
         open={editVisible}
         onClose={closeEditHandler}
