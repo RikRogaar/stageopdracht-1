@@ -73,13 +73,15 @@ export default function TodoEdit ({ id }) {
               bordered
               fullWidth
               size="lg"
-              label="Edit image url"
+              label="Edit logo url"
               type="url"
-              placeholder="Image url (optional)"
+              placeholder="Logo url (optional)"
               name="image"
               value={formValues.image || ""}
               onChange={onChange}
             />
+
+
 
           </Modal.Body>
           <Modal.Footer className="cursor-default">

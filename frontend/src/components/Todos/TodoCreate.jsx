@@ -70,9 +70,9 @@ export default function TodoCreate () {
               bordered
               fullWidth
               size="lg"
-              label="Enter an image url"
+              label="Enter a logo url"
               type="url"
-              placeholder="Image url (optional)"
+              placeholder="Logo url (optional)"
               name="image"
               value={formValues.image}
               onChange={onChange}

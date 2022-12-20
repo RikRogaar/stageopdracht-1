@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,13 +15,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        DB::table('todo_items')->insert([
+            'title' => 'Finish assignment',
+            'description' => 'Finish the assignment for the Laravel course',
+            'is_completed' => false,
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        DB::table('todo_items')->insert([
+            'title' => 'Finish bInsta',
+            'description' => 'Finish the bInsta project',
+            'is_completed' => false,
+        ]);
 
-        
+        DB::table('todo_items')->insert([
+            'title' => 'Copy and paste code',
+            'description' => 'uhmmm...',
+            'is_completed' => true,
+        ]);
+
     }
 }
