@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'Finish bInsta',
             'description' => 'Finish the bInsta project',
             'is_completed' => false,
+            'image' => 'https://img.icons8.com/ios-glyphs/512/compact-camera.png',
         ]);
 
         DB::table('todo_items')->insert([
