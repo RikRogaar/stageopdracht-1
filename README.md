@@ -7,6 +7,7 @@ To install composer:
 
 To setup the database:
 > php artisan migrate
+>
 > 'yes' to continue
 >
 > php artisan migrate:fresh --seed
