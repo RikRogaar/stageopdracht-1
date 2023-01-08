@@ -24,8 +24,8 @@ class StoreTodoRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:30',
-            'image' => 'nullable|string',
+            'title' => 'required|string|max:99',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'is_completed' => 'required|boolean',
             'description' => 'nullable|string',
         ];

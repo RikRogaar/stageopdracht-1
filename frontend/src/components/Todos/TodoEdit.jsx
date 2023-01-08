@@ -19,7 +19,10 @@ export default function TodoEdit ({ id }) {
 
   return (
     <div>
-      <Text color="secondary" onClick={handleEdit} className="cursor-pointer">
+      <Text color="white" onClick={handleEdit} className="cursor-pointer" css={{
+        fontWeight: "bold",
+        fontSize: "0.9rem",
+      }}>
         Edit
       </Text>
 
@@ -69,18 +72,24 @@ export default function TodoEdit ({ id }) {
               onChange={onChange}
             />
 
-            <Input
-              clearable
-              bordered
-              fullWidth
-              size="lg"
-              label="Edit logo url"
-              type="url"
-              placeholder="Logo url (optional)"
+            <label
+              htmlFor="image"
+            >
+              Change image
+            </label>
+
+            <input
+              type="file"
               name="image"
-              value={formValues.image || ""}
               onChange={onChange}
+              css={{ marginTop: "1rem" }}
             />
+
+            {errors.image && (
+              <Text color="error" size={14}>
+                {errors.image}
+              </Text>
+            )}
           </Modal.Body>
 
           <Modal.Footer className="cursor-default">

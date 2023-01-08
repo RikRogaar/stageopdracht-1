@@ -5,11 +5,13 @@ import { Modal, Input, Button, Text, Textarea } from "@nextui-org/react";
 export default function TodoCreate () {
   const { formValues, onChange, storeTodo, errors, setVisible, visible, clearFormValues } = useContext(TodoContext);
 
-
-
   function handleCreate() {
     clearFormValues();
     setVisible(true);
+  }
+
+  function log() {
+    console.log(formValues);
   }
 
   const closeCreateHandler = () => {
@@ -65,18 +67,25 @@ export default function TodoCreate () {
               onChange={onChange}
             />
 
-            <Input
-              clearable
-              bordered
-              fullWidth
-              size="lg"
-              label="Enter a logo url"
-              type="url"
-              placeholder="Logo url (optional)"
+            <label
+              htmlFor="image"
+            >
+              Upload an image
+            </label>
+
+            <input
+              type="file"
               name="image"
-              value={formValues.image}
               onChange={onChange}
+              css={{ marginTop: "1rem" }}
             />
+
+            {errors.image && (
+              <Text color="error" size={14}>
+                {errors.image}
+              </Text>
+            )}
+
           </Modal.Body>
           <Modal.Footer className="cursor-default">
             <Button

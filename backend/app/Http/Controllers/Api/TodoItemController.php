@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTodoRequest;
 use App\Http\Resources\Api\TodoItemResource;
 use App\Models\todoItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TodoItemController extends Controller
 {
@@ -22,14 +23,34 @@ class TodoItemController extends Controller
 
     public function store(StoreTodoRequest $request)
     {
-        todoItem::create($request->validated());
+        $validated = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $request->file('image')->storeAs('images', $request->file('image')->getClientOriginalName(), 'public');
+            $validated['image'] = $request->file('image')->getClientOriginalName();
+        }
+
+        todoItem::create($validated);
 
         return response()->json("Todo Item Created");
     }
 
     public function update(StoreTodoRequest $request, todoItem $todoItem)
     {
-        $todoItem->update($request->validated());
+        $validated = $request->validated();
+
+
+        if ($request->hasFile('image')) {
+          $request->file('image')->storeAs('images', $request->file('image')->getClientOriginalName(), 'public');
+          $validated['image'] = $request->file('image')->getClientOriginalName();
+        } else {
+            $validated['title'] = $request->title;
+            $validated['image'] = $todoItem->image;
+            $validated['is_completed'] = $request->is_completed;
+            $validated['description'] = $request->description;
+        }
+
+        $todoItem->update($validated);
 
         return response()->json("Todo Item Updated");
     }
