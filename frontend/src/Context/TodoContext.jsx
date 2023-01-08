@@ -54,7 +54,7 @@ export const TodoProdiver = ({ children }) => {
         const { name, value } = e.target;
 
         if (name === "image") {
-            setFormValues({ ...formValues, [name]: e.target.files[0] });
+            setFormValues({ ...formValues, image: e.target.files[0] });
             return;
         }
 
@@ -86,7 +86,7 @@ export const TodoProdiver = ({ children }) => {
         }
     };
 
-    const updateTodo = async (id) => {
+    async function updateTodo (id) {
         try {
             const formData = new FormData();
 
@@ -102,8 +102,8 @@ export const TodoProdiver = ({ children }) => {
             await axios.put(`todo-items/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
-                  }
-                })
+                }
+            });
 
             getTodos();
         } catch (error) {

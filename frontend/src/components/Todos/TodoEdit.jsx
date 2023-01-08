@@ -44,19 +44,17 @@ export default function TodoEdit ({ id }) {
         </Modal.Header>
 
         <Modal.Body className="cursor-default">
-            <Input
+        <Input
               clearable
               bordered
               fullWidth
-              preventClose
               size="lg"
-              label="Edit todo title"
+              label="Enter your todo title"
               placeholder="Todo title"
               name="title"
               value={formValues.title}
               onChange={onChange}
             />
-
             {errors.title && (
               <Text color="error" size={14}>
                 {errors.title}
@@ -64,18 +62,18 @@ export default function TodoEdit ({ id }) {
             )}
 
             <Textarea
-              label="Edit todo description"
+              label="Enter your todo description"
               size="lg"
               placeholder="Description (optional)"
               name="description"
-              value={formValues.description || ""}
+              value={formValues.description}
               onChange={onChange}
             />
 
             <label
               htmlFor="image"
             >
-              Change image
+              Upload an image
             </label>
 
             <input
@@ -90,6 +88,7 @@ export default function TodoEdit ({ id }) {
                 {errors.image}
               </Text>
             )}
+
           </Modal.Body>
 
           <Modal.Footer className="cursor-default">

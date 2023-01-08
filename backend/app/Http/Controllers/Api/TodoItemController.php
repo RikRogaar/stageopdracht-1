@@ -39,15 +39,11 @@ class TodoItemController extends Controller
     {
         $validated = $request->validated();
 
-
         if ($request->hasFile('image')) {
-          $request->file('image')->storeAs('images', $request->file('image')->getClientOriginalName(), 'public');
-          $validated['image'] = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('images', $request->file('image')->getClientOriginalName(), 'public');
+            $validated['image'] = $request->file('image')->getClientOriginalName();
         } else {
-            $validated['title'] = $request->title;
             $validated['image'] = $todoItem->image;
-            $validated['is_completed'] = $request->is_completed;
-            $validated['description'] = $request->description;
         }
 
         $todoItem->update($validated);
