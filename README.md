@@ -4,10 +4,12 @@ Setup backend
 =
 To install composer:
 > composer install
->
-> composer dump-autoload
 
-To seed the database:
+To setup the database:
+> php artisan migrate
+>
+> 'yes' to continue
+>
 > php artisan migrate:fresh --seed
 
 To run the backend:
