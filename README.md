@@ -4,6 +4,7 @@ Setup backend
 =
 To install composer:
 > composer install
+> 
 > Not found error? > delete vendor folder
 
 To setup the database:
