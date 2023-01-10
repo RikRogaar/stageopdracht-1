@@ -73,7 +73,7 @@ export default function TodoEdit ({ id }) {
             <label
               htmlFor="image"
             >
-              Upload an image
+              Change the image
             </label>
 
             <input

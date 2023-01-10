@@ -92,14 +92,14 @@ export const TodoProdiver = ({ children }) => {
 
             formData.append("title", formValues.title);
             formData.append("description", formValues.description);
-            formData.append("image", formValues.image);
             formData.append("is_completed", formValues.is_completed);
+            formData.append("_method", "PUT")
 
-            formData.forEach((value, key) => {
-                console.log(key, value);
-            });
+            if (formValues.image instanceof File) {
+                formData.append("image", formValues.image);
+            }
 
-            await axios.put(`todo-items/${id}`, formData, {
+            await axios.post(`todo-items/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -108,7 +108,7 @@ export const TodoProdiver = ({ children }) => {
             getTodos();
         } catch (error) {
             if (error.response.status === 422) {
-                console.log(error.response.data.errors);
+                console.log(error.response.data.errors)
                 setErrors(error.response.data.errors);
             }
         }
